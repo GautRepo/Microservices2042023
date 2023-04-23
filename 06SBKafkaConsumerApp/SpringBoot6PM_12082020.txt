@@ -1,0 +1,84 @@
+			Date : 12/08/2020
+			Spring Boot 6PM
+			Mr. RAGHU
+	  ----------------------------------------------------
+		Spring Boot with Apache Kafka Integration
+
+Apache Kafka : It is Messaging tool (MQs concept).
+
+->  Apache Kafka is a Open source Java and Scala Integration Production.
+->  *** Supports Large data tranfer in Realtime.
+->  Kafka used by Twitter, Netflix,..etc
+->  *** Multiple Messages Brokers to handle Load balance (Autoscale),
+    ie called as Kafka Cluster.
+->  Autoscale of Kafka Cluster is handled using Zookeeper(BootstrapServer).
+->  Data sending is done in key-val in Serialized format.
+->  Serialized data is sent using data partitions.
+->  Here, Key=TopicName(DestinationName), V= Data.
+->  Send data using Topics(Pub/Sub), only one type.
+    [We can even use same, to send data to one consumer even].
+
+->  Kafka S/w is called as Kafka EcoSystem  = Kafka Cluster + BootstrapServer
+
+->  *** Kafka is Protocol independent, even your application is running
+    on HTTP, TCP, FTPP,....etc
+
+---------------------------------------------------------------------------------
+		kafka Cluster with one Message Broker
+---------------------------------------------------------------------------------
+ 
+ Topics(Destination) : It is a memory that holds data given by Producer App 
+			in Serialized format. Data Parts are called as Partitions.
+
+ Message Replica : It creates cloned messages for actual input, to send same data to
+	               multiple consumers.
+
+ GroupId : It indicates a unique number/name given to multiple conusmer. So, that  
+           all these consumers are processed by one Messages broker in order.
+
+=> Consumer App must provide groupId and TopicName. 
+   TopicName is to select message from Destination. 
+
+=> Data Serialization : Convert Actual Data format to binary format(byte[]).
+=> Data Deserialization : Convert Binary data to actual data format.
+    
+-----------------------------------------------------------------------------------
+Q) Can different consumer have same groupId with different TopicName?
+A) YES, Possible. But no meaning of using groupId here.
+   GroupId is used to make fast detection of same topic Consumers
+   and crate replicas those many count and send faster. 
+
+*************************************************************************
+  Apache Kafka S/w Download and setup:-
+
+#1 Goto Download loc:
+  https://kafka.apache.org/downloads
+
+#2. Under Binary downloads:
+   Scala 2.12  - kafka_2.12-2.6.0.tgz
+
+#3. Click any one option to download
+   Click 1st Link under HTTP
+   (shows like : http://apachemirror.wuchna.com/kafka/2.6.0/kafka_2.12-2.6.0.tgz)
+
+#4. Extract to folder once downloaded using 7-ZIP Software.
+
+#5. Place Extracted folder in C: drive
+
+#6. Start Zookeeper S/w using below command
+  > open cmd (win+R)
+  > cd C:\kafka_2.12-2.6.0
+  > .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+#7. Start Kafka Server(Cluster with one broker)
+ > open cmd (win+R)
+ > cd C:\kafka_2.12-2.6.0
+ > .\bin\windows\kafka-server-start.bat .\config\server.properties
+
+** For non-windows OS, commands are
+.\bin\zookeeper-server-start.sh .\config\zookeeper.properties
+.\bin\kafka-server-start.sh .\config\server.properties 
+
+*** bootstrap server runs on PORT: 9092
+--------------------------------------------------------------
+
